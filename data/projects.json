@@ -1,0 +1,62 @@
+[
+  {
+    "id": "01",
+    "title": "MIA — Merchant Inquiry Agent",
+    "description": "Outbound AI voice agent that cold-calls cafes to pitch and sell oat milk — handles product questions, objections, and books follow-ups autonomously.",
+    "tags": ["OpenAI", "Sarvam", "LiveKit"],
+    "hotTags": ["VAPI", "n8n"],
+    "impact": "Live pilot — outreach results tracking in progress",
+    "demoUrl": "",
+    "media": { "type": "youtube", "videoId": "ro9HUpdz3dA", "title": "MIA cold-calling a cafe — live demo" },
+    "flagship": true,
+    "status": "published"
+  },
+  {
+    "id": "02",
+    "title": "Project Legais",
+    "description": "In progress — details coming soon.",
+    "tags": [],
+    "hotTags": [],
+    "impact": "",
+    "demoUrl": "",
+    "media": null,
+    "flagship": true,
+    "status": "in-progress"
+  },
+  {
+    "id": "03",
+    "title": "Invoice Auditor",
+    "description": "Live interactive demo — try it directly below.",
+    "tags": [],
+    "hotTags": [],
+    "impact": "",
+    "demoUrl": "https://ia-demo-liart.vercel.app/",
+    "media": { "type": "iframe", "url": "https://ia-demo-liart.vercel.app/", "title": "Invoice Auditor live demo" },
+    "flagship": false,
+    "status": "published"
+  },
+  {
+    "id": "04",
+    "title": "Internal Ops Agent — Skyeverse",
+    "description": "Multi-agent system that monitors Slack, triages support tickets, assigns tasks, and posts daily summaries. Built on a custom orchestration layer with tool-calling and memory.",
+    "tags": ["OpenAI", "Gemini", "OpenRouter"],
+    "hotTags": ["n8n", "Supabase", "Playwright"],
+    "impact": "Replaced 3 manual ops workflows, saving ~20 hrs/week across team",
+    "demoUrl": "",
+    "media": null,
+    "flagship": false,
+    "status": "published"
+  },
+  {
+    "id": "05",
+    "title": "Lead Enrichment & Outreach Automation",
+    "description": "Scrapes target company lists, enriches each lead with AI-generated context, and sends personalised outreach sequences — all triggered by a single spreadsheet update.",
+    "tags": ["OpenAI", "Gemini"],
+    "hotTags": ["Apify", "n8n", "Playwright"],
+    "impact": "3x reply rate vs manual outreach; processed 2,400 leads in first week",
+    "demoUrl": "",
+    "media": null,
+    "flagship": false,
+    "status": "published"
+  }
+]
