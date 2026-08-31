@@ -1,0 +1,23 @@
+{
+  "slug": "~/stack",
+  "num": "02",
+  "display": "Grouped by what it's <em>for</em> — not by what I've once opened.",
+  "groups": [
+    {
+      "label": "MODELS & REASONING",
+      "items": ["OpenAI", "Gemini", "Structured extraction", "RAG · embeddings", "Agent tool-use"]
+    },
+    {
+      "label": "AUTOMATION",
+      "items": ["n8n", "Apify", "Playwright", "Webhooks · OAuth", "Event-driven jobs"]
+    },
+    {
+      "label": "VOICE",
+      "items": ["LiveKit", "VAPI", "Turn-taking · barge-in", "Telephony hand-off", "Call transcripts"]
+    },
+    {
+      "label": "SHIP IT",
+      "items": ["Python", "FastAPI", "Supabase · Postgres", "Docker", "Queues · retries"]
+    }
+  ]
+}

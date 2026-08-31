@@ -1,36 +1,27 @@
-const groups = [
-  {
-    label: "AI / LLMs",
-    items: ["OpenAI", "Gemini", "OpenRouter", "Sarvam"],
-  },
-  {
-    label: "Automation",
-    items: ["n8n", "Apify", "Playwright"],
-  },
-  {
-    label: "Backend",
-    items: ["Python", "FastAPI", "Supabase"],
-  },
-  {
-    label: "Voice",
-    items: ["LiveKit", "VAPI", "Sarvam"],
-  },
-];
+import stack from "../../data/stack.json";
+import SectionHead from "./SectionHead";
 
 export default function Stack() {
   return (
-    <section className="stack-section" id="stack">
-      <div className="container">
-        <p className="section-label">AI Stack</p>
-        <div className="stack-groups">
-          {groups.map((group) => (
-            <div className="stack-group" key={group.label}>
-              <p className="stack-group-label">{group.label}</p>
-              <div className="stack-items">
+    <section className="sec" id="stack">
+      <div className="wrap">
+        <SectionHead slug={stack.slug} num={stack.num} />
+
+        <h2
+          className="display"
+          style={{ maxWidth: "600px" }}
+          dangerouslySetInnerHTML={{ __html: stack.display }}
+        />
+
+        <div className="stack-grid">
+          {stack.groups.map((group) => (
+            <div className="stack-col" key={group.label}>
+              <p className="stack-label">{group.label}</p>
+              <ul>
                 {group.items.map((item) => (
-                  <span className="stack-item" key={item}>{item}</span>
+                  <li key={item}>{item}</li>
                 ))}
-              </div>
+              </ul>
             </div>
           ))}
         </div>

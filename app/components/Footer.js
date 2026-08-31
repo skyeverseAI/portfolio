@@ -1,29 +1,15 @@
-const links = [
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "GitHub", href: "https://github.com" },
-  { label: "Instagram", href: "https://instagram.com" },
-  { label: "Email", href: "mailto:akash.skyeverse@gmail.com" },
-];
+import site from "../../data/site.json";
 
 export default function Footer() {
+  const { footer } = site;
+
   return (
-    <footer className="footer" id="contact">
-      <div className="container footer-inner">
-        <span className="footer-copy">akash.build · 2025</span>
-        <div className="footer-links">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="footer-link"
-              target={link.href.startsWith("mailto") ? undefined : "_blank"}
-              rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
+    <div className="sec-dark">
+      <div className="wrap foot">
+        <span>{footer.left}</span>
+        <span>{footer.middle}</span>
+        <span>{footer.right}</span>
       </div>
-    </footer>
+    </div>
   );
 }

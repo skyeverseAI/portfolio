@@ -1,0 +1,63 @@
+{
+  "masthead": {
+    "name": "Akash Kumar",
+    "meta": "Est. 2026 · Remote"
+  },
+  "wordmark": "akash.build",
+  "entry": {
+    "headword": "AI & Automations Engineer",
+    "partOfSpeech": "noun",
+    "phonetic": "/ ˈɑː.kɑːʃ · dɒt · bɪld /",
+    "senses": [
+      {
+        "label": "1.",
+        "text": "A person who builds production-grade AI systems and automations to eliminate repetitive work."
+      },
+      {
+        "label": "Prev.",
+        "prev": true,
+        "text": "A mechanical engineer who kept automating his own job until it became the job."
+      }
+    ]
+  },
+  "terminal": {
+    "title": "CLAUDE — AKASH@BUILD",
+    "intro": "Hey there — this is Akash.",
+    "registers": "I work in two registers: {automations} (voice agents, ops bots, lead-enrichment pipelines) and {applied ML} (currently LERAGS — a local-only RAG pipeline over scanned court filings)."
+  },
+  "about": {
+    "slug": "~/about",
+    "num": "01",
+    "display": ["If a human has to do it twice,", "I want to know why software isn't."],
+    "prose": [
+      "I trained as a mechanical engineer. What I actually did, most days, was watch competent people retype numbers between systems — and then write scripts so they wouldn't have to. That habit outgrew the discipline, and now it is the work: I design and ship production-grade agents, voice pipelines and internal tools that remove repetitive labour at scale.",
+      "The mechanical background left a bias I've kept. A workflow is a machine: it has tolerances, failure modes and a duty cycle. Most AI projects fail not on model quality but on the unglamorous parts — retries, idempotency, what happens when the third-party API returns HTML instead of JSON at 2am.",
+      "So I build for the boring case first. Then the demo takes care of itself."
+    ],
+    "currently": [
+      "LERAGS — local-only RAG over scanned court filings",
+      "Voice agents that survive real callers, not scripts",
+      "Evaluation harnesses for agents nobody watches",
+      "Making LLMs earn their place in a pipeline"
+    ],
+    "beforeThis": "Mechanical engineering — drawings, tolerances, and a great deal of manual data entry that taught me what to delete."
+  },
+  "contact": {
+    "slug": "~/contact",
+    "num": "05",
+    "display": "Have a process that eats your week?",
+    "lede": "Tell me the boring version of it — the spreadsheet, the inbox, the phone that keeps ringing. That's usually where the good automation is hiding.",
+    "email": "akash.skyeverse@gmail.com",
+    "links": [
+      { "label": "LinkedIn", "href": "#", "icon": "↗", "placeholder": true },
+      { "label": "GitHub", "href": "#", "icon": "↗", "placeholder": true },
+      { "label": "Substack", "href": "https://skyeverse.substack.com/", "icon": "↗" },
+      { "label": "Résumé (PDF)", "href": "#", "icon": "↓", "placeholder": true }
+    ]
+  },
+  "footer": {
+    "left": "AKASH.BUILD",
+    "middle": "SET IN CORMORANT GARAMOND & LORA",
+    "right": "AKASH@BUILD:~$ EXIT"
+  }
+}

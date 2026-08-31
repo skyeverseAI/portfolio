@@ -1,27 +1,24 @@
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
-import Timeline from "./components/Timeline";
-import Projects from "./components/Projects";
+import About from "./components/About";
 import Stack from "./components/Stack";
-import CurrentlyBuilding from "./components/CurrentlyBuilding";
-import Writing from "./components/Writing";
+import Work from "./components/Work";
+import Writings from "./components/Writings";
+import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 export default function Home() {
   return (
     <>
-<Nav />
-
+      <Nav />
+      <Hero />
       <main>
-        <Hero />
-        <div className="glow-divider" />
-        <Timeline />
-        <Projects />
+        <About />
         <Stack />
-        <CurrentlyBuilding />
-        <Writing />
+        <Work />
+        <Writings />
+        <Contact />
       </main>
-
       <Footer />
     </>
   );

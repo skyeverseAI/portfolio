@@ -1,33 +1,42 @@
-import { IBM_Plex_Mono, Sora } from "next/font/google";
+import { Cormorant_Garamond, IBM_Plex_Mono, Lora } from "next/font/google";
 import "./globals.css";
-import SmoothScroll from "./components/SmoothScroll";
 
-const sora = Sora({
-  variable: "--font-sora",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
+const lora = Lora({
+  variable: "--font-body",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
 export const metadata = {
-  title: "Akash — AI Automation Engineer",
+  title: "akash.build — AI & Automations Engineer",
   description:
-    "Building operational AI systems that run. Production-grade agents, voice pipelines, and internal tools.",
+    "A person who builds production-grade AI systems and automations to eliminate repetitive work.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${sora.variable} ${ibmPlexMono.variable}`}>
-      <body>
-        <SmoothScroll />
-        {children}
-      </body>
+    <html
+      lang="en"
+      className={`${cormorant.variable} ${lora.variable} ${plexMono.variable}`}
+    >
+      <body>{children}</body>
     </html>
   );
 }

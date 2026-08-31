@@ -1,0 +1,57 @@
+{
+  "slug": "~/work",
+  "num": "03",
+  "display": "Things built to solve problems that shouldn't have needed a person.",
+  "tabs": [
+    {
+      "id": "ml",
+      "label": "APPLIED ML",
+      "blurb": "Applied ML — retrieval, extraction and evaluation. Work where the hard part is knowing whether the output is right.",
+      "projects": [
+        {
+          "num": "01",
+          "title": "LERAGS",
+          "tags": ["RAG", "Local-only", "OCR", "Python"],
+          "status": "IN PROGRESS",
+          "problem": "Scanned court filings — thousands of pages, no text layer, and material too sensitive to send to a hosted model.",
+          "approach": "A local-only pipeline: OCR, layout-aware chunking, embeddings and retrieval that never leave the machine, with citations back to the page image.",
+          "result": "Answers a lawyer can check against the original page, with nothing egressing to a third party.",
+          "case": [
+            {
+              "heading": "WHY THE OBVIOUS APPROACH FAILED",
+              "body": "Chunk-and-embed over raw OCR text produced confident nonsense: headers, stamps and margin notes read as body copy, and no citation could be traced back to anything a human could verify."
+            },
+            {
+              "heading": "ARCHITECTURE",
+              "body": "OCR with layout retained → page-aware chunking that keeps a chunk inside one logical block → local embeddings → retrieval that returns the page image alongside the passage."
+            },
+            {
+              "heading": "TRADE-OFFS",
+              "body": "Local-only costs quality against a frontier model, and indexing is slow. For this material that is the right trade — the binding constraint is confidentiality, not latency."
+            },
+            {
+              "heading": "WHAT I'D DO NEXT",
+              "body": "A labelled question set per filing type, so a retrieval change can be scored instead of eyeballed."
+            }
+          ]
+        },
+        {
+          "num": "02",
+          "title": "Document extraction harness",
+          "tags": ["Structured output", "Evals", "FastAPI"],
+          "status": "DRAFT ENTRY — REPLACE",
+          "problem": "Extraction that looked right in the demo and quietly drifted in production.",
+          "approach": "Schema-first extraction with a labelled fixture set and a scored eval run on every prompt change.",
+          "result": "Prompt edits stopped being a gamble.",
+          "case": null
+        }
+      ]
+    },
+    {
+      "id": "auto",
+      "label": "AUTOMATIONS",
+      "blurb": "Automations — voice agents, ops bots and the pipelines that keep them fed. Work where the win is measured in hours nobody has to spend.",
+      "projects": []
+    }
+  ]
+}
