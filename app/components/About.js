@@ -20,9 +20,20 @@ export default function About() {
               ))}
             </h2>
             <div className="about-prose">
-              {about.prose.map((paragraph) => (
-                <p key={paragraph.slice(0, 32)}>{paragraph}</p>
-              ))}
+              {about.prose.map((block, i) =>
+                typeof block === "string" ? (
+                  <p key={i}>{block}</p>
+                ) : (
+                  <p className="about-pull" key={i}>
+                    {block.pull.map((line, j) => (
+                      <span key={line}>
+                        {line}
+                        {j < block.pull.length - 1 && <br />}
+                      </span>
+                    ))}
+                  </p>
+                )
+              )}
             </div>
           </div>
 
@@ -37,8 +48,18 @@ export default function About() {
               ))}
             </ul>
             <div className="side-divider" />
-            <p className="side-label">&gt; BEFORE THIS</p>
-            <p style={{ margin: 0 }}>{about.beforeThis}</p>
+            <p className="side-label">&gt; TRACE</p>
+            <ol className="trace">
+              {about.timeline.map((entry) => (
+                <li
+                  className={`trace-item${entry.current ? " trace-now" : ""}`}
+                  key={entry.year}
+                >
+                  <span className="trace-year">{entry.year}</span>
+                  <span className="trace-role">{entry.role}</span>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </div>

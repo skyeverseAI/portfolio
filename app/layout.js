@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${cormorant.variable} ${lora.variable} ${plexMono.variable}`}
     >
-      <body>{children}</body>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }

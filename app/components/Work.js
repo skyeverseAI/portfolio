@@ -21,7 +21,25 @@ function Project({ project }) {
             ))}
           </div>
         )}
-        {project.status && <p className="proj-status">{project.status}</p>}
+        {(project.status || project.where) && (
+          <p className="proj-status">
+            {project.status}
+            {project.status && project.where && (
+              <span className="proj-where-sep"> · </span>
+            )}
+            {project.where && <span className="proj-where">{project.where}</span>}
+          </p>
+        )}
+        {project.repo && (
+          <a
+            className="proj-repo"
+            href={project.repo}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            CODE &#8599;
+          </a>
+        )}
       </div>
 
       <div>
@@ -33,10 +51,12 @@ function Project({ project }) {
           <span className="kv-k">APPROACH</span>
           <p className="kv-v">{project.approach}</p>
         </div>
-        <div className="kv kv-result">
-          <span className="kv-k">RESULT</span>
-          <p className="kv-v">{project.result}</p>
-        </div>
+        {project.result && (
+          <div className="kv kv-result">
+            <span className="kv-k">RESULT</span>
+            <p className="kv-v">{project.result}</p>
+          </div>
+        )}
 
         {project.case && (
           <>

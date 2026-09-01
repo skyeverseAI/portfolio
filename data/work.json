@@ -6,11 +6,13 @@
     {
       "id": "ml",
       "label": "APPLIED ML",
-      "blurb": "Applied ML — retrieval, extraction and evaluation. Work where the hard part is knowing whether the output is right.",
+      "blurb": "Applied ML — retrieval, extraction and judgement. Work where the hard part is knowing whether the output is right.",
       "projects": [
         {
           "num": "01",
           "title": "LERAGS",
+          "repo": "https://github.com/skyeverseAI/LERAGS",
+          "where": "Independent · 2026",
           "tags": ["RAG", "Local-only", "OCR", "Python"],
           "status": "IN PROGRESS",
           "problem": "Scanned court filings — thousands of pages, no text layer, and material too sensitive to send to a hosted model.",
@@ -37,12 +39,46 @@
         },
         {
           "num": "02",
-          "title": "Document extraction harness",
-          "tags": ["Structured output", "Evals", "FastAPI"],
-          "status": "DRAFT ENTRY — REPLACE",
-          "problem": "Extraction that looked right in the demo and quietly drifted in production.",
-          "approach": "Schema-first extraction with a labelled fixture set and a scored eval run on every prompt change.",
-          "result": "Prompt edits stopped being a gamble.",
+          "title": "Invoice auditor",
+          "repo": "https://github.com/skyeverseAI/invoice-auditor",
+          "where": "Skyeverse · 2026",
+          "tags": ["Vision", "Gemini", "Validation", "Telegram"],
+          "status": "IN USE",
+          "problem": "Invoices were being checked by eye. The ones that need catching are exactly the ones that look fine — arithmetic that doesn't add up, a total that doesn't match its own line items, the same invoice submitted twice.",
+          "approach": "The model is allowed to read and forbidden to compute. Gemini extracts what is printed on the page; JavaScript recomputes every number and disagrees out loud when the invoice doesn't add up. Send a PDF to a Telegram bot, get back PASS or a flag with reasons.",
+          "result": null,
+          "case": [
+            {
+              "heading": "WHY THE OBVIOUS APPROACH FAILED",
+              "body": "Asking the model for the totals worked on clean invoices and failed silently on the ones that mattered. A model reading a column of numbers that don't sum will helpfully return the sum it expected — which is precisely the invoice you needed flagged."
+            },
+            {
+              "heading": "THE SPLIT",
+              "body": "The extraction prompt says it in as many words: do not infer the subtotal, do not calculate the total, return null when a field isn't printed. Every figure is then recomputed downstream — each line against quantity × rate, the total against charges plus tax plus shipping minus discount — and any disagreement over half a rupee becomes a flag carrying its own reason."
+            },
+            {
+              "heading": "WHAT IT CATCHES",
+              "body": "Line math that doesn't multiply. A subtotal that contradicts its own line items. A stated total that doesn't match its parts. A missing signature. And the same invoice number arriving twice, which is checked against the ledger before anything is written."
+            },
+            {
+              "heading": "A FLAG IS NOT A REJECTION",
+              "body": "Every flagged invoice can be cleared through an override endpoint that marks it PASS with 'Manual Override' as the recorded reason. The ledger ends up storing who decided, not only what the machine thought — which is the difference between a control and an obstacle."
+            },
+            {
+              "heading": "WHAT I'D DO NEXT",
+              "body": "Unusual formats needed their own rules — a timesheet invoice billing hours × rate parses nothing like a goods invoice. Right now each new format is a prompt edit made on judgement. A labelled fixture set per format would let me score a prompt change instead of eyeballing one."
+            }
+          ]
+        },
+        {
+          "num": "03",
+          "title": "Lead scoring engine",
+          "where": "Skyeverse · 2026",
+          "tags": ["Claude", "Structured output", "Apify", "Notion"],
+          "status": "IN USE",
+          "problem": "Scraped lead lists are mostly noise, and the judgement that separates a prospect from a name — is this person actually looking for clients — is the part a filter can't do.",
+          "approach": "Two scores, deliberately different in kind. A deterministic 100-point pass reads the facts on a profile: title, following, whether the bio talks about acquiring clients. A model then reads the same profile for buying readiness against a fixed schema. Final score is 40% the arithmetic, 60% the judgement; anything at or above 60 becomes a Notion record with an outreach hook attached.",
+          "result": null,
           "case": null
         }
       ]
@@ -51,7 +87,92 @@
       "id": "auto",
       "label": "AUTOMATIONS",
       "blurb": "Automations — voice agents, ops bots and the pipelines that keep them fed. Work where the win is measured in hours nobody has to spend.",
-      "projects": []
+      "projects": [
+        {
+          "num": "01",
+          "title": "MIA — outbound voice agent",
+          "where": "Skyeverse · 2026",
+          "tags": ["Voice", "Airtable", "State machine", "Webhooks"],
+          "status": "IN USE",
+          "problem": "Outbound calling to cafés and hotels: hundreds of numbers, most of which go nowhere, and a CRM that only stays useful if every call comes back and writes down what happened.",
+          "approach": "A queue in Airtable ordered by who was called least recently. MIA takes the next lead, normalises the number, locks the record before dialling and makes the call. The return leg is a seven-way switch on how the call ended, each branch writing a different CRM state before merging back to store the transcript, the summary and the objection.",
+          "result": null,
+          "case": [
+            {
+              "heading": "THE HARD PART IS THE RETURN LEG",
+              "body": "Placing a call is a single HTTP request. What makes the system worth anything is that a finished call resolves to one of seven states — hot, warm, callback, not interested, voicemail, wrong number, invalid — and each one means something different to the person who reads the CRM tomorrow morning."
+            },
+            {
+              "heading": "WHY THE STATUS LOCK COMES FIRST",
+              "body": "A lead is marked Calling before the dial, not after it. Two overlapping runs would otherwise mean a real person receiving two calls from the same company in a minute, which is a worse failure than missing them entirely. The webhook also answers 200 before it does any work, so a slow Airtable write can never look like a failed call."
+            },
+            {
+              "heading": "WHAT GETS WRITTEN DOWN",
+              "body": "Transcript, an AI summary, and the objection that ended the call — stored per lead, not per call. The objection field is the one that changed how the script was written: the reasons people say no cluster far more tightly than the reasons they say yes."
+            },
+            {
+              "heading": "WHAT I'D DO NEXT",
+              "body": "The agent's product knowledge lives in the prompt, which caps how much it can know and makes every catalogue change a redeploy. Retrieval fixes both, but a lookup inside a live turn spends latency I don't have — the budget is already speech recognition plus inference plus speech synthesis before the caller hears a word, and dead air is how someone decides they're talking to a robot. The version worth building retrieves once at call setup against what the CRM already knows about the lead, rather than mid-sentence."
+            }
+          ]
+        },
+        {
+          "num": "02",
+          "title": "Cause list watch",
+          "where": "Dept. of Revenue · 2025",
+          "tags": ["Playwright", "Google Sheets", "Python"],
+          "status": "IN USE",
+          "problem": "Every morning, someone read down the High Court cause list by hand looking for the cases where the department was the respondent, then retyped them into a sheet.",
+          "approach": "Headless Playwright walks the cause list for a date range and court hall, tracks the section headings as it goes, and keeps only the rows whose respondent matches. Each match is appended to the sheet the moment it's found, with a CSV fallback for when Sheets is unreachable.",
+          "result": "Ten fields per case — next hearing, judge, petitioner advocate — in the sheet without anyone reading the list.",
+          "case": null
+        },
+        {
+          "num": "03",
+          "title": "Bulk case status",
+          "where": "Dept. of Revenue · 2025",
+          "tags": ["Playwright", "OCR", "Tesseract", "Streamlit"],
+          "status": "IN USE",
+          "problem": "Checking a list of cases meant loading the portal once per case, clearing a challenge each time, and copying four fields into a spreadsheet.",
+          "approach": "Paste the case numbers. It works through them one at a time, reads the numeric challenge with OpenCV preprocessing and a digits-only OCR pass, requests a fresh one when the read fails, and fills a table on screen as it goes.",
+          "result": "A pasted list in, an Excel file out, and the run visible while it happens.",
+          "case": null
+        },
+        {
+          "num": "04",
+          "title": "Inbound lead pipeline",
+          "where": "Skyeverse · 2026",
+          "tags": ["n8n", "LLM agent", "Gmail", "Calendar"],
+          "status": "IN USE",
+          "problem": "An enquiry form is easy. What breaks is everything after it — replies that bounce into a void, meetings booked and then quietly cancelled, and a sheet that slowly stops describing reality.",
+          "approach": "Form to sheet to a drafted reply, then three separate handlers for the ways it goes wrong: a bounce watcher that reads the failed address out of the mailer-daemon's nested MIME parts, calendar triggers that reconcile bookings and cancellations back onto the row, and a live dashboard served straight off the sheet.",
+          "result": "The sheet still matches reality a month later, which is the whole point.",
+          "case": null
+        },
+        {
+          "num": "05",
+          "title": "Magica",
+          "where": "Idea Clan · 2022–24",
+          "tags": ["ffmpeg", "Python stdlib", "macOS"],
+          "status": "SHIPPED",
+          "problem": "An editor was cutting the same ad by hand, one hook at a time — every hook against every body against every call to action, as separate exports.",
+          "approach": "Point it at folders of hooks, bodies and CTAs. It renders every combination through ffmpeg, named and dated, while you go do something else. Python standard library only, no install, runs in a browser tab.",
+          "result": "The permutations stopped being cut by hand.",
+          "case": null
+        },
+        {
+          "num": "06",
+          "title": "Case file labels",
+          "repo": "https://github.com/skyeverseAI/csv-sticker-automator",
+          "where": "Dept. of Revenue · 2025",
+          "tags": ["Streamlit", "Print CSS", "Pandas"],
+          "status": "IN USE",
+          "problem": "Every physical case file needs a printed label — case number, party, commissionerate. They were being typed one at a time.",
+          "approach": "Upload the CSV that already exists. It lays the cases out three to an A4 page with print-safe breaks and returns an HTML file you print straight from the browser.",
+          "result": "The smallest of the six and the most literal: paper that stopped being retyped.",
+          "case": null
+        }
+      ]
     }
   ]
 }

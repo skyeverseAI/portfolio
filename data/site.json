@@ -1,13 +1,13 @@
 {
   "masthead": {
-    "name": "Akash Kumar",
+    "name": "Aakash Aggarwal",
     "meta": "Est. 2026 · Remote"
   },
-  "wordmark": "akash.build",
+  "wordmark": "aakash.builds",
   "entry": {
     "headword": "AI & Automations Engineer",
     "partOfSpeech": "noun",
-    "phonetic": "/ ˈɑː.kɑːʃ · dɒt · bɪld /",
+    "phonetic": "/ ˈɑː.kɑːʃ · bɪldz /",
     "senses": [
       {
         "label": "1.",
@@ -22,7 +22,7 @@
   },
   "terminal": {
     "title": "CLAUDE — AKASH@BUILD",
-    "intro": "Hey there — this is Akash.",
+    "intro": "Hey there — this is Aakash.",
     "registers": "I work in two registers: {automations} (voice agents, ops bots, lead-enrichment pipelines) and {applied ML} (currently LERAGS — a local-only RAG pipeline over scanned court filings)."
   },
   "about": {
@@ -30,9 +30,18 @@
     "num": "01",
     "display": ["If a human has to do it twice,", "I want to know why software isn't."],
     "prose": [
-      "I trained as a mechanical engineer. What I actually did, most days, was watch competent people retype numbers between systems — and then write scripts so they wouldn't have to. That habit outgrew the discipline, and now it is the work: I design and ship production-grade agents, voice pipelines and internal tools that remove repetitive labour at scale.",
-      "The mechanical background left a bias I've kept. A workflow is a machine: it has tolerances, failure modes and a duty cycle. Most AI projects fail not on model quality but on the unglamorous parts — retries, idempotency, what happens when the third-party API returns HTML instead of JSON at 2am.",
-      "So I build for the boring case first. Then the demo takes care of itself."
+      "I trained as a mechanical engineer.",
+      "At Eicher Tractors, I watched competent people spend entire days copying numbers between forms.",
+      "So I rebuilt the forms.",
+      "Crude, but the day got shorter.",
+      "At Idea Clan, I saw the same thing again: an editor cutting the same ad, one hook at a time.",
+      "So I built Magica to do the repetition.",
+      {"pull": ["Find the thing being done twice.", "Delete the second time."]},
+      "Now I build agents, voice systems and internal tools that remove repetitive work.",
+      {"pull": ["The art is the human.", "The process is the machine."]},
+      "Machines handle the repetition.",
+      "Humans handle the judgement.",
+      "That's what I build for."
     ],
     "currently": [
       "LERAGS — local-only RAG over scanned court filings",
@@ -40,7 +49,12 @@
       "Evaluation harnesses for agents nobody watches",
       "Making LLMs earn their place in a pipeline"
     ],
-    "beforeThis": "Mechanical engineering — drawings, tolerances, and a great deal of manual data entry that taught me what to delete."
+    "timeline": [
+      { "year": "2019", "role": "Eicher Tractors" },
+      { "year": "2020", "role": "Mechanical Engineering" },
+      { "year": "2022–24", "role": "Idea Clan" },
+      { "year": "2025–", "role": "Inspector of GST, Department of Revenue", "current": true }
+    ]
   },
   "contact": {
     "slug": "~/contact",
@@ -49,8 +63,8 @@
     "lede": "Tell me the boring version of it — the spreadsheet, the inbox, the phone that keeps ringing. That's usually where the good automation is hiding.",
     "email": "akash.skyeverse@gmail.com",
     "links": [
-      { "label": "LinkedIn", "href": "#", "icon": "↗", "placeholder": true },
-      { "label": "GitHub", "href": "#", "icon": "↗", "placeholder": true },
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/skyeverse/", "icon": "↗" },
+      { "label": "GitHub", "href": "https://github.com/skyeverseAI", "icon": "↗" },
       { "label": "Substack", "href": "https://skyeverse.substack.com/", "icon": "↗" },
       { "label": "Résumé (PDF)", "href": "#", "icon": "↓", "placeholder": true }
     ]
