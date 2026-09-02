@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const CMD1 = "cd akash/";
+const CMD1 = "cd aakash/";
 const CMD2 = "cat aboutme.txt";
-const ROUTES = ["about", "stack", "work", "writings", "contact"];
+const ROUTES = ["about", "stack", "work", "contact"];
 
 /* Splits "…{automations} (…) and {applied ML} (…)" into highlighted spans. */
 function renderRegisters(text) {
@@ -80,7 +80,7 @@ export default function Terminal({ title, intro, registers }) {
     if (cmd === "ls") {
       setHistory((h) => [
         ...h,
-        { cls: "tdim", text: "about/    stack/    work/    writings/    contact/" },
+        { cls: "tdim", text: "about/    stack/    work/    contact/" },
       ]);
       return;
     }
@@ -127,15 +127,15 @@ export default function Terminal({ title, intro, registers }) {
 
       <div className="term-body">
         <p className="tline">
-          <span className="tuser">akash@build</span>
+          <span className="tuser">aakash@builds</span>
           <span className="tpath">:~$</span> {typed1}
           {stage === 0 && <span className="caret blink" />}
         </p>
 
         {stage >= 1 && (
           <p className="tline">
-            <span className="tuser">akash@build</span>
-            <span className="tpath">:~/akash/$</span> {typed2}
+            <span className="tuser">aakash@builds</span>
+            <span className="tpath">:~/aakash/$</span> {typed2}
             {stage === 1 && <span className="caret blink" />}
           </p>
         )}
@@ -148,11 +148,11 @@ export default function Terminal({ title, intro, registers }) {
             <p className="tline tout">{renderRegisters(registers)}</p>
             <div className="tgap" />
             <p className="tline">
-              <span className="tuser">akash@build</span>
-              <span className="tpath">:~/akash/$</span> ls
+              <span className="tuser">aakash@builds</span>
+              <span className="tpath">:~/aakash/$</span> ls
             </p>
             <p className="tline tdim">
-              about/&nbsp;&nbsp;&nbsp;&nbsp;stack/&nbsp;&nbsp;&nbsp;&nbsp;work/&nbsp;&nbsp;&nbsp;&nbsp;writings/&nbsp;&nbsp;&nbsp;&nbsp;contact/
+              about/&nbsp;&nbsp;&nbsp;&nbsp;stack/&nbsp;&nbsp;&nbsp;&nbsp;work/&nbsp;&nbsp;&nbsp;&nbsp;contact/
             </p>
             <div className="tgap" />
 
@@ -164,8 +164,8 @@ export default function Terminal({ title, intro, registers }) {
             ))}
 
             <form className="term-input-row" onSubmit={onSubmit}>
-              <span className="tuser">akash@build</span>
-              <span className="tpath">:~/akash/$</span>
+              <span className="tuser">aakash@builds</span>
+              <span className="tpath">:~/aakash/$</span>
               <input
                 className="term-input"
                 type="text"

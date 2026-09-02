@@ -6,7 +6,6 @@ const SECTIONS = [
   { id: "about", path: "~/about" },
   { id: "stack", path: "~/stack" },
   { id: "work", path: "~/work" },
-  { id: "writings", path: "~/writings" },
   { id: "contact", path: "~/contact" },
 ];
 
@@ -37,7 +36,7 @@ export default function Nav() {
     <nav className={`nav${visible ? " visible" : ""}`}>
       <span className="nav-prompt">
         <span className="nav-dot" />
-        <span className="nav-user">akash@build</span>
+        <span className="nav-user">aakash@builds</span>
         <span className="nav-path">:{active.path}$</span>
       </span>
       <span className="nav-links">

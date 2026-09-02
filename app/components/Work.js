@@ -4,6 +4,62 @@ import { useState } from "react";
 import work from "../../data/work.json";
 import SectionHead from "./SectionHead";
 
+const LANDED = ["DONE", "REPLACED", "MEASURED"];
+
+function Stage({ stage }) {
+  const [open, setOpen] = useState(false);
+  const landed = LANDED.includes(stage.status);
+
+  return (
+    <div className={`stage${landed ? " stage-landed" : ""}`}>
+      <button
+        type="button"
+        className="stage-btn"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+      >
+        <span className="stage-num">{stage.num}</span>
+        <span className="stage-title">{stage.title}</span>
+        <span className="stage-status">{stage.status}</span>
+        <span className="stage-chev" aria-hidden="true">
+          {open ? "\u2191" : "\u2192"}
+        </span>
+      </button>
+
+      {open && (
+        <div className="stage-panel">
+          <p className="stage-body">{stage.body}</p>
+          {stage.metrics && (
+            <dl className="stage-metrics">
+              {stage.metrics.map(([k, v]) => (
+                <div key={k}>
+                  <dt>{k}</dt>
+                  <dd>{v}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function StagedCase({ stages }) {
+  const landed = stages.filter((s) => LANDED.includes(s.status)).length;
+
+  return (
+    <div className="stage-list">
+      <p className="stage-progress">
+        {String(landed).padStart(2, "0")} OF {String(stages.length).padStart(2, "0")} STAGES LANDED
+      </p>
+      {stages.map((stage) => (
+        <Stage key={stage.num} stage={stage} />
+      ))}
+    </div>
+  );
+}
+
 function Project({ project }) {
   const [openCase, setOpenCase] = useState(false);
 
@@ -70,12 +126,16 @@ function Project({ project }) {
             </button>
             {openCase && (
               <div className="case-panel">
-                {project.case.map((block) => (
-                  <div key={block.heading}>
-                    <h4>{block.heading}</h4>
-                    <p>{block.body}</p>
-                  </div>
-                ))}
+                {Array.isArray(project.case) ? (
+                  project.case.map((block) => (
+                    <div key={block.heading}>
+                      <h4>{block.heading}</h4>
+                      <p>{block.body}</p>
+                    </div>
+                  ))
+                ) : (
+                  <StagedCase stages={project.case.stages} />
+                )}
               </div>
             )}
           </>

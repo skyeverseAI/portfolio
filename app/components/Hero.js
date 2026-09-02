@@ -1,7 +1,7 @@
 import site from "../../data/site.json";
 import Terminal from "./Terminal";
 
-const DOCK = ["about", "stack", "work", "writings", "contact"];
+const DOCK = ["about", "stack", "work", "contact"];
 
 export default function Hero() {
   const { masthead, wordmark, entry, terminal } = site;

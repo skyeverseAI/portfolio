@@ -2,9 +2,17 @@
 
 # akash.build — portfolio
 
-Personal portfolio for Akash Kumar. Next.js (App Router), fully static, no backend.
+Personal portfolio for Aakash Aggarwal. Next.js (App Router), fully static, no backend.
 
 Run: `npm run dev` → http://localhost:3000 · Build: `npm run build` · Lint: `npm run lint`
+
+`npm run build:single [dest.html]` writes the whole site — markup, CSS, fonts, JS —
+into one self-contained HTML file that works off the filesystem, for sending the
+portfolio to someone who just wants to look at it. It static-exports to `out/`
+(that's what `STATIC_EXPORT=1` in `next.config.mjs` switches on) and then
+`scripts/build-single-file.mjs` folds the assets in. That script patches two
+minified Turbopack internals so the inlined chunks still hydrate; it throws if a
+Next upgrade renames them, rather than emitting a page that renders but is dead.
 
 ## Shape of the site
 
@@ -17,12 +25,11 @@ anchor-scrolls. Order and ground colour alternate deliberately:
 | about `01` | `about` | light | `data/site.json` → `about` |
 | stack `02` | `stack` | light | `data/stack.json` |
 | work `03` | `work` | light | `data/work.json` |
-| writings `04` | `writings` | light | `data/writings.json` |
-| contact `05` | `contact` | dark | `data/site.json` → `contact` |
+| contact `04` | `contact` | dark | `data/site.json` → `contact` |
 
 The sticky nav is hidden over the hero and slides in below it. Its left side is a
-live shell prompt whose path tracks the section you're in (`:~/about$` →
-`:~/work$`). That behaviour lives in `app/components/Nav.js`.
+live shell prompt (`aakash@builds`) whose path tracks the section you're in
+(`:~/about$` → `:~/work$`). That behaviour lives in `app/components/Nav.js`.
 
 ## Content is data, not markup
 
@@ -32,7 +39,6 @@ require touching JSX.
 - `data/site.json` — masthead, wordmark, dictionary entry, terminal copy, about prose, contact, footer
 - `data/work.json` — projects, split into the `ml` (APPLIED ML) and `auto` (AUTOMATIONS) tabs. **The split is by what the project had to get right, not by technology:** `ml` is work where the hard part was knowing whether the output was right; `auto` is work where the win is hours removed. Nearly everything now has a model in it, so a technology split sorts nothing.
 - `data/stack.json` — the four stack columns
-- `data/writings.json` — post list
 
 A work entry:
 
@@ -90,9 +96,14 @@ wipes that padding out. Use `padding-top` / `padding-bottom`. This has bitten tw
 - **Three `result` fields are `null`, on purpose:** invoice auditor, lead scoring engine, MIA. The measurements exist in the systems themselves — call counts and outcomes in Airtable, PASS/FLAG counts in the invoice sheet, the conversion rate the lead dashboard already computes. Ask Akash for the real figures; don't invent them and don't fill the gap with adjectives.
 - **`where` values are unverified** except the Dept. of Revenue ones. LERAGS is marked `Independent · 2026` and Magica `Idea Clan · 2022–24` on inference, not on Akash's word.
 - **One placeholder link left** in `data/site.json` → `contact.links`: the résumé PDF, marked `"placeholder": true`, pointing at `#`. Email, LinkedIn, GitHub and Substack are real. (The `placeholder` flag is documentation only — `Contact.js` does not read it.)
-- Writings posts have empty `href` and fall back to the Substack URL.
 
 ## History
+
+**The `writings` section was removed on 2026-09-02**, not lost. It was four posts whose
+`href` were all empty, so every one of them landed on the Substack homepage — four links
+that read as broken. The Substack itself is still linked from `04 contact`. To bring the
+section back, restore `Writings.js`, `data/writings.json` and the `.writ-*` CSS block from
+git history, and renumber contact back to `05`.
 
 The previous portfolio (amber/orange theme, Timeline + Projects + CurrentlyBuilding
 components) is **archived, not deleted** — tag `v1-archive`, branch

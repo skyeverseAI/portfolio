@@ -25,7 +25,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata = {
-  title: "akash.build — AI & Automations Engineer",
+  title: "Aakash Aggarwal — AI & Automations Engineer",
   description:
     "A person who builds production-grade AI systems and automations to eliminate repetitive work.",
 };

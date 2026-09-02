@@ -17,25 +17,80 @@
           "status": "IN PROGRESS",
           "problem": "Scanned court filings — thousands of pages, no text layer, and material too sensitive to send to a hosted model.",
           "approach": "A local-only pipeline: OCR, layout-aware chunking, embeddings and retrieval that never leave the machine, with citations back to the page image.",
-          "result": "Answers a lawyer can check against the original page, with nothing egressing to a third party.",
-          "case": [
-            {
-              "heading": "WHY THE OBVIOUS APPROACH FAILED",
-              "body": "Chunk-and-embed over raw OCR text produced confident nonsense: headers, stamps and margin notes read as body copy, and no citation could be traced back to anything a human could verify."
-            },
-            {
-              "heading": "ARCHITECTURE",
-              "body": "OCR with layout retained → page-aware chunking that keeps a chunk inside one logical block → local embeddings → retrieval that returns the page image alongside the passage."
-            },
-            {
-              "heading": "TRADE-OFFS",
-              "body": "Local-only costs quality against a frontier model, and indexing is slow. For this material that is the right trade — the binding constraint is confidentiality, not latency."
-            },
-            {
-              "heading": "WHAT I'D DO NEXT",
-              "body": "A labelled question set per filing type, so a retrieval change can be scored instead of eyeballed."
-            }
-          ]
+          "result": "10,062 pages of scanned petitions turned into structured text — 2.8× what the PDFs' own text layer carried.",
+          "case": {
+            "kind": "stages",
+            "stages": [
+              {
+                "num": "01",
+                "title": "OCR pipeline",
+                "status": "DONE",
+                "body": "The PDFs had a text layer and it looked usable. It wasn't — it carried about a third of the corpus, and two thirds of the documents were invisible to it. Compared OCR tools on real pages rather than on a benchmark, picked docling with OcrMac, and ran the lot locally.",
+                "metrics": [
+                  ["Corpus", "64 files · 10,062 pages · zero errors"],
+                  ["OCR text vs incumbent layer", "30.5M chars vs 10.7M — 2.8×"],
+                  ["Coverage the old layer had", "35%"],
+                  ["Throughput, after tuning", "13.1 h → 2.1 h"],
+                  ["Still open", "78 pages (0.8%) came back empty, unchecked against their page images"]
+                ]
+              },
+              {
+                "num": "02",
+                "title": "Structured conversion and chunking",
+                "status": "DONE",
+                "body": "Splitting joined markdown on characters tore a third of all table rows away from the headers that gave them meaning. Chunking the structured document with docling's HybridChunker instead cut that by four times. Validated on ten files, not on the one file that first showed the problem.",
+                "metrics": [
+                  ["Markdown + character splitter", "45,424 chunks · 15,063 orphaned · 33.2%"],
+                  ["DoclingDoc + HybridChunker", "157,400 table cells · 12,977 orphaned · 8.2%"],
+                  ["Conversion time", "3h 28m actual · 1.28 s/page"]
+                ]
+              },
+              {
+                "num": "03",
+                "title": "Metadata — and the plan being wrong",
+                "status": "REPLACED",
+                "body": "The plan was a local LLM reading whole documents into a pydantic schema. Measured across three prompt and schema configurations, it never once got a case number right, and every config that fixed one field broke another. Some fields — CNR, status, hearing dates — aren't in the documents at all. So metadata now comes from the court registry instead, which resolves 62 of 62 on every field.",
+                "metrics": [
+                  ["LLM over OCR text", "case number never correct · respondents 5 on one file, none on the next"],
+                  ["Registry lookup", "62/62 on every field · 146 respondents across 62 files"]
+                ]
+              },
+              {
+                "num": "04",
+                "title": "The claim I had to withdraw",
+                "status": "MEASURED",
+                "body": "I wrote that this proved the project's second finding — that bad OCR breaks metadata extraction. Then someone asked whether the OCR was actually bad, or whether I had assumed it. Nobody had measured it. Using the registry as ground truth: did each file's own OCR text contain its petitioner's name? It did. The text was legible and the model failed on it anyway, which makes this a model-capability result, not an OCR-quality one. The finding is untested, not proven.",
+                "metrics": [
+                  ["Mean share of name tokens found in OCR", "0.914"],
+                  ["Files with every token present", "55 / 62"],
+                  ["Files with none", "4 / 62"]
+                ]
+              },
+              {
+                "num": "05",
+                "title": "Retrieval metrics",
+                "status": "NEXT",
+                "body": "Rewriting similarity by hand — recall@k, precision@k, MRR, nDCG — rather than carrying the course version across, because the parameters need re-measuring on legal text.",
+                "metrics": null
+              },
+              {
+                "num": "06",
+                "title": "Evalset",
+                "status": "PLANNED",
+                "body": "Real lawyer questions with gold labels. Boring, and not skippable: without it every finding downstream is a vibe.",
+                "metrics": null
+              },
+              {
+                "num": "07",
+                "title": "Baseline, then the three experiments",
+                "status": "PLANNED",
+                "body": "Baseline recall, then the three things this project exists to test — whether OCR quality is the ceiling, whether bad metadata breaks filtering, and whether MMR matters more on legal boilerplate than on prose.",
+                "metrics": [
+                  ["Contrast baseline carried over", "404 chunks · bge-small · recall@5 = 0.650"]
+                ]
+              }
+            ]
+          }
         },
         {
           "num": "02",

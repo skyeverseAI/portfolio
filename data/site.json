@@ -21,14 +21,17 @@
     ]
   },
   "terminal": {
-    "title": "CLAUDE — AKASH@BUILD",
+    "title": "CLAUDE — AAKASH@BUILDS",
     "intro": "Hey there — this is Aakash.",
     "registers": "I work in two registers: {automations} (voice agents, ops bots, lead-enrichment pipelines) and {applied ML} (currently LERAGS — a local-only RAG pipeline over scanned court filings)."
   },
   "about": {
     "slug": "~/about",
     "num": "01",
-    "display": ["If a human has to do it twice,", "I want to know why software isn't."],
+    "display": [
+      "If a human has to do it twice,",
+      "I want to know why software isn't."
+    ],
     "prose": [
       "I trained as a mechanical engineer.",
       "At Eicher Tractors, I watched competent people spend entire days copying numbers between forms.",
@@ -36,9 +39,19 @@
       "Crude, but the day got shorter.",
       "At Idea Clan, I saw the same thing again: an editor cutting the same ad, one hook at a time.",
       "So I built Magica to do the repetition.",
-      {"pull": ["Find the thing being done twice.", "Delete the second time."]},
+      {
+        "pull": [
+          "Find the thing being done twice.",
+          "Delete the second time."
+        ]
+      },
       "Now I build agents, voice systems and internal tools that remove repetitive work.",
-      {"pull": ["The art is the human.", "The process is the machine."]},
+      {
+        "pull": [
+          "The art is the human.",
+          "The process is the machine."
+        ]
+      },
       "Machines handle the repetition.",
       "Humans handle the judgement.",
       "That's what I build for."
@@ -50,28 +63,58 @@
       "Making LLMs earn their place in a pipeline"
     ],
     "timeline": [
-      { "year": "2019", "role": "Eicher Tractors" },
-      { "year": "2020", "role": "Mechanical Engineering" },
-      { "year": "2022–24", "role": "Idea Clan" },
-      { "year": "2025–", "role": "Inspector of GST, Department of Revenue", "current": true }
+      {
+        "year": "2019",
+        "role": "Eicher Tractors"
+      },
+      {
+        "year": "2020",
+        "role": "Mechanical Engineering"
+      },
+      {
+        "year": "2022–24",
+        "role": "Idea Clan"
+      },
+      {
+        "year": "2025–",
+        "role": "Inspector of GST, Department of Revenue",
+        "current": true
+      }
     ]
   },
   "contact": {
     "slug": "~/contact",
-    "num": "05",
+    "num": "04",
     "display": "Have a process that eats your week?",
     "lede": "Tell me the boring version of it — the spreadsheet, the inbox, the phone that keeps ringing. That's usually where the good automation is hiding.",
     "email": "akash.skyeverse@gmail.com",
     "links": [
-      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/skyeverse/", "icon": "↗" },
-      { "label": "GitHub", "href": "https://github.com/skyeverseAI", "icon": "↗" },
-      { "label": "Substack", "href": "https://skyeverse.substack.com/", "icon": "↗" },
-      { "label": "Résumé (PDF)", "href": "#", "icon": "↓", "placeholder": true }
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/skyeverse/",
+        "icon": "↗"
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/skyeverseAI",
+        "icon": "↗"
+      },
+      {
+        "label": "Substack",
+        "href": "https://skyeverse.substack.com/",
+        "icon": "↗"
+      },
+      {
+        "label": "Résumé (PDF)",
+        "href": "#",
+        "icon": "↓",
+        "placeholder": true
+      }
     ]
   },
   "footer": {
-    "left": "AKASH.BUILD",
+    "left": "AAKASH.BUILDS",
     "middle": "SET IN CORMORANT GARAMOND & LORA",
-    "right": "AKASH@BUILD:~$ EXIT"
+    "right": "AAKASH@BUILDS:~$ EXIT"
   }
 }
