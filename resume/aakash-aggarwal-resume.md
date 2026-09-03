@@ -89,7 +89,7 @@ focus on measuring whether an output is actually correct, not whether a demo run
   addresses out of nested MIME, calendar reconciliation of bookings and cancellations
   back onto the row, and a dashboard served off the sheet.
 
-**Magica — ad permutation renderer** · Idea Clan · 2022–24
+**Magica — ad permutation renderer** · Idea Clan · 2023–25
 *Python standard library, ffmpeg*
 
 - Rendered every hook x body x CTA combination from folders of source clips through
@@ -103,7 +103,7 @@ focus on measuring whether an output is actually correct, not whether a demo run
 Built and deployed the court automation suite above alongside statutory duties,
 removing recurring manual data entry from departmental litigation tracking.
 
-**AI Automation Engineer** (formerly Data Analyst) — Idea Clan · 2023–2024
+**AI Automation Engineer** (formerly Data Analyst) — Idea Clan, Panchkula · 2023 – mid 2025
 Built Magica, an ad permutation renderer that removed manual per-variant editing
 from the creative pipeline.
 
@@ -135,7 +135,8 @@ and retries
 # NOTES — DELETE THIS SECTION BEFORE EXPORTING
 
 **Confirm before sending anywhere:**
-1. Job titles at Idea Clan and Eicher Tractors.
+1. Job title at Eicher Tractors. (Idea Clan confirmed 2026-09-03: AI Automation
+   Engineer, formerly Data Analyst, Panchkula, 2023 – mid 2025.)
 2. Degree name (B.E. / B.Tech) and institution.
 3. Your city, if you want it above "India" — country-level is fine and more private.
 4. Whether "Skyeverse" should appear as the banner on those four projects, or whether

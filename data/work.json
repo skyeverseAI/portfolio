@@ -13,7 +13,12 @@
           "title": "LERAGS",
           "repo": "https://github.com/skyeverseAI/LERAGS",
           "where": "Independent · 2026",
-          "tags": ["RAG", "Local-only", "OCR", "Python"],
+          "tags": [
+            "RAG",
+            "Local-only",
+            "OCR",
+            "Python"
+          ],
           "status": "IN PROGRESS",
           "problem": "Scanned court filings — thousands of pages, no text layer, and material too sensitive to send to a hosted model.",
           "approach": "A local-only pipeline: OCR, layout-aware chunking, embeddings and retrieval that never leave the machine, with citations back to the page image.",
@@ -27,11 +32,26 @@
                 "status": "DONE",
                 "body": "The PDFs had a text layer and it looked usable. It wasn't — it carried about a third of the corpus, and two thirds of the documents were invisible to it. Compared OCR tools on real pages rather than on a benchmark, picked docling with OcrMac, and ran the lot locally.",
                 "metrics": [
-                  ["Corpus", "64 files · 10,062 pages · zero errors"],
-                  ["OCR text vs incumbent layer", "30.5M chars vs 10.7M — 2.8×"],
-                  ["Coverage the old layer had", "35%"],
-                  ["Throughput, after tuning", "13.1 h → 2.1 h"],
-                  ["Still open", "78 pages (0.8%) came back empty, unchecked against their page images"]
+                  [
+                    "Corpus",
+                    "64 files · 10,062 pages · zero errors"
+                  ],
+                  [
+                    "OCR text vs incumbent layer",
+                    "30.5M chars vs 10.7M — 2.8×"
+                  ],
+                  [
+                    "Coverage the old layer had",
+                    "35%"
+                  ],
+                  [
+                    "Throughput, after tuning",
+                    "13.1 h → 2.1 h"
+                  ],
+                  [
+                    "Still open",
+                    "78 pages (0.8%) came back empty, unchecked against their page images"
+                  ]
                 ]
               },
               {
@@ -40,9 +60,18 @@
                 "status": "DONE",
                 "body": "Splitting joined markdown on characters tore a third of all table rows away from the headers that gave them meaning. Chunking the structured document with docling's HybridChunker instead cut that by four times. Validated on ten files, not on the one file that first showed the problem.",
                 "metrics": [
-                  ["Markdown + character splitter", "45,424 chunks · 15,063 orphaned · 33.2%"],
-                  ["DoclingDoc + HybridChunker", "157,400 table cells · 12,977 orphaned · 8.2%"],
-                  ["Conversion time", "3h 28m actual · 1.28 s/page"]
+                  [
+                    "Markdown + character splitter",
+                    "45,424 chunks · 15,063 orphaned · 33.2%"
+                  ],
+                  [
+                    "DoclingDoc + HybridChunker",
+                    "157,400 table cells · 12,977 orphaned · 8.2%"
+                  ],
+                  [
+                    "Conversion time",
+                    "3h 28m actual · 1.28 s/page"
+                  ]
                 ]
               },
               {
@@ -51,8 +80,14 @@
                 "status": "REPLACED",
                 "body": "The plan was a local LLM reading whole documents into a pydantic schema. Measured across three prompt and schema configurations, it never once got a case number right, and every config that fixed one field broke another. Some fields — CNR, status, hearing dates — aren't in the documents at all. So metadata now comes from the court registry instead, which resolves 62 of 62 on every field.",
                 "metrics": [
-                  ["LLM over OCR text", "case number never correct · respondents 5 on one file, none on the next"],
-                  ["Registry lookup", "62/62 on every field · 146 respondents across 62 files"]
+                  [
+                    "LLM over OCR text",
+                    "case number never correct · respondents 5 on one file, none on the next"
+                  ],
+                  [
+                    "Registry lookup",
+                    "62/62 on every field · 146 respondents across 62 files"
+                  ]
                 ]
               },
               {
@@ -61,9 +96,18 @@
                 "status": "MEASURED",
                 "body": "I wrote that this proved the project's second finding — that bad OCR breaks metadata extraction. Then someone asked whether the OCR was actually bad, or whether I had assumed it. Nobody had measured it. Using the registry as ground truth: did each file's own OCR text contain its petitioner's name? It did. The text was legible and the model failed on it anyway, which makes this a model-capability result, not an OCR-quality one. The finding is untested, not proven.",
                 "metrics": [
-                  ["Mean share of name tokens found in OCR", "0.914"],
-                  ["Files with every token present", "55 / 62"],
-                  ["Files with none", "4 / 62"]
+                  [
+                    "Mean share of name tokens found in OCR",
+                    "0.914"
+                  ],
+                  [
+                    "Files with every token present",
+                    "55 / 62"
+                  ],
+                  [
+                    "Files with none",
+                    "4 / 62"
+                  ]
                 ]
               },
               {
@@ -86,7 +130,10 @@
                 "status": "PLANNED",
                 "body": "Baseline recall, then the three things this project exists to test — whether OCR quality is the ceiling, whether bad metadata breaks filtering, and whether MMR matters more on legal boilerplate than on prose.",
                 "metrics": [
-                  ["Contrast baseline carried over", "404 chunks · bge-small · recall@5 = 0.650"]
+                  [
+                    "Contrast baseline carried over",
+                    "404 chunks · bge-small · recall@5 = 0.650"
+                  ]
                 ]
               }
             ]
@@ -97,7 +144,12 @@
           "title": "Invoice auditor",
           "repo": "https://github.com/skyeverseAI/invoice-auditor",
           "where": "Skyeverse · 2026",
-          "tags": ["Vision", "Gemini", "Validation", "Telegram"],
+          "tags": [
+            "Vision",
+            "Gemini",
+            "Validation",
+            "Telegram"
+          ],
           "status": "IN USE",
           "problem": "Invoices were being checked by eye. The ones that need catching are exactly the ones that look fine — arithmetic that doesn't add up, a total that doesn't match its own line items, the same invoice submitted twice.",
           "approach": "The model is allowed to read and forbidden to compute. Gemini extracts what is printed on the page; JavaScript recomputes every number and disagrees out loud when the invoice doesn't add up. Send a PDF to a Telegram bot, get back PASS or a flag with reasons.",
@@ -129,7 +181,12 @@
           "num": "03",
           "title": "Lead scoring engine",
           "where": "Skyeverse · 2026",
-          "tags": ["Claude", "Structured output", "Apify", "Notion"],
+          "tags": [
+            "Claude",
+            "Structured output",
+            "Apify",
+            "Notion"
+          ],
           "status": "IN USE",
           "problem": "Scraped lead lists are mostly noise, and the judgement that separates a prospect from a name — is this person actually looking for clients — is the part a filter can't do.",
           "approach": "Two scores, deliberately different in kind. A deterministic 100-point pass reads the facts on a profile: title, following, whether the bio talks about acquiring clients. A model then reads the same profile for buying readiness against a fixed schema. Final score is 40% the arithmetic, 60% the judgement; anything at or above 60 becomes a Notion record with an outreach hook attached.",
@@ -147,7 +204,12 @@
           "num": "01",
           "title": "MIA — outbound voice agent",
           "where": "Skyeverse · 2026",
-          "tags": ["Voice", "Airtable", "State machine", "Webhooks"],
+          "tags": [
+            "Voice",
+            "Airtable",
+            "State machine",
+            "Webhooks"
+          ],
           "status": "IN USE",
           "problem": "Outbound calling to cafés and hotels: hundreds of numbers, most of which go nowhere, and a CRM that only stays useful if every call comes back and writes down what happened.",
           "approach": "A queue in Airtable ordered by who was called least recently. MIA takes the next lead, normalises the number, locks the record before dialling and makes the call. The return leg is a seven-way switch on how the call ended, each branch writing a different CRM state before merging back to store the transcript, the summary and the objection.",
@@ -175,7 +237,11 @@
           "num": "02",
           "title": "Cause list watch",
           "where": "Dept. of Revenue · 2025",
-          "tags": ["Playwright", "Google Sheets", "Python"],
+          "tags": [
+            "Playwright",
+            "Google Sheets",
+            "Python"
+          ],
           "status": "IN USE",
           "problem": "Every morning, someone read down the High Court cause list by hand looking for the cases where the department was the respondent, then retyped them into a sheet.",
           "approach": "Headless Playwright walks the cause list for a date range and court hall, tracks the section headings as it goes, and keeps only the rows whose respondent matches. Each match is appended to the sheet the moment it's found, with a CSV fallback for when Sheets is unreachable.",
@@ -186,7 +252,12 @@
           "num": "03",
           "title": "Bulk case status",
           "where": "Dept. of Revenue · 2025",
-          "tags": ["Playwright", "OCR", "Tesseract", "Streamlit"],
+          "tags": [
+            "Playwright",
+            "OCR",
+            "Tesseract",
+            "Streamlit"
+          ],
           "status": "IN USE",
           "problem": "Checking a list of cases meant loading the portal once per case, clearing a challenge each time, and copying four fields into a spreadsheet.",
           "approach": "Paste the case numbers. It works through them one at a time, reads the numeric challenge with OpenCV preprocessing and a digits-only OCR pass, requests a fresh one when the read fails, and fills a table on screen as it goes.",
@@ -197,7 +268,12 @@
           "num": "04",
           "title": "Inbound lead pipeline",
           "where": "Skyeverse · 2026",
-          "tags": ["n8n", "LLM agent", "Gmail", "Calendar"],
+          "tags": [
+            "n8n",
+            "LLM agent",
+            "Gmail",
+            "Calendar"
+          ],
           "status": "IN USE",
           "problem": "An enquiry form is easy. What breaks is everything after it — replies that bounce into a void, meetings booked and then quietly cancelled, and a sheet that slowly stops describing reality.",
           "approach": "Form to sheet to a drafted reply, then three separate handlers for the ways it goes wrong: a bounce watcher that reads the failed address out of the mailer-daemon's nested MIME parts, calendar triggers that reconcile bookings and cancellations back onto the row, and a live dashboard served straight off the sheet.",
@@ -207,8 +283,12 @@
         {
           "num": "05",
           "title": "Magica",
-          "where": "Idea Clan · 2022–24",
-          "tags": ["ffmpeg", "Python stdlib", "macOS"],
+          "where": "Idea Clan · 2023–25",
+          "tags": [
+            "ffmpeg",
+            "Python stdlib",
+            "macOS"
+          ],
           "status": "SHIPPED",
           "problem": "An editor was cutting the same ad by hand, one hook at a time — every hook against every body against every call to action, as separate exports.",
           "approach": "Point it at folders of hooks, bodies and CTAs. It renders every combination through ffmpeg, named and dated, while you go do something else. Python standard library only, no install, runs in a browser tab.",
@@ -220,7 +300,11 @@
           "title": "Case file labels",
           "repo": "https://github.com/skyeverseAI/csv-sticker-automator",
           "where": "Dept. of Revenue · 2025",
-          "tags": ["Streamlit", "Print CSS", "Pandas"],
+          "tags": [
+            "Streamlit",
+            "Print CSS",
+            "Pandas"
+          ],
           "status": "IN USE",
           "problem": "Every physical case file needs a printed label — case number, party, commissionerate. They were being typed one at a time.",
           "approach": "Upload the CSV that already exists. It lays the cases out three to an A4 page with print-safe breaks and returns an HTML file you print straight from the browser.",
