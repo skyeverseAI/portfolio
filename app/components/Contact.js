@@ -20,7 +20,9 @@ export default function Contact() {
 
           <div className="link-list">
             {contact.links.map((link) => {
-              const external = link.href.startsWith("http");
+              // PDFs open in a new tab too — a download shouldn't nuke the page.
+              const external =
+                link.href.startsWith("http") || link.href.endsWith(".pdf");
               return (
                 <a
                   className="link-row"
@@ -34,6 +36,20 @@ export default function Contact() {
                 </a>
               );
             })}
+
+            {contact.availability && (
+              <div className="availability">
+                <p className="availability-label">
+                  <span className="availability-dot" />
+                  {contact.availability.label}
+                </p>
+                {contact.availability.lines.map((line) => (
+                  <p className="availability-line" key={line}>
+                    {line}
+                  </p>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

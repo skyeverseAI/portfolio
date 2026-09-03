@@ -987,6 +987,42 @@ button {
   color: var(--amber);
 }
 
+.availability {
+  margin-top: 30px;
+}
+
+.availability-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin: 0 0 12px;
+}
+
+.availability-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+}
+
+.availability-line {
+  max-width: 46ch;
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(240, 236, 228, 0.62);
+  margin: 0 0 6px;
+}
+
+.availability-line:last-child {
+  color: rgba(240, 236, 228, 0.42);
+  margin-bottom: 0;
+}
+
 /* footer */
 
 .foot {

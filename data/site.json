@@ -1,7 +1,7 @@
 {
   "masthead": {
     "name": "Aakash Aggarwal",
-    "meta": "Est. 2026 · Remote"
+    "meta": "Open to work"
   },
   "wordmark": "aakash.builds",
   "entry": {
@@ -79,6 +79,11 @@
         "year": "2025–",
         "role": "Inspector of GST, Department of Revenue",
         "current": true
+      },
+      {
+        "year": "2026–",
+        "role": "Skyeverse — independent practice",
+        "current": true
       }
     ]
   },
@@ -88,6 +93,13 @@
     "display": "Have a process that eats your week?",
     "lede": "Tell me the boring version of it — the spreadsheet, the inbox, the phone that keeps ringing. That's usually where the good automation is hiding.",
     "email": "akash.skyeverse@gmail.com",
+    "availability": {
+      "label": "Availability",
+      "lines": [
+        "India · IST (UTC+5:30). Open to remote roles worldwide, and to relocation with visa sponsorship.",
+        "No current EU/UK/US work authorization."
+      ]
+    },
     "links": [
       {
         "label": "LinkedIn",
@@ -106,9 +118,8 @@
       },
       {
         "label": "Résumé (PDF)",
-        "href": "#",
-        "icon": "↓",
-        "placeholder": true
+        "href": "/Aakash-Aggarwal-AI-Automation-Engineer.pdf",
+        "icon": "↓"
       }
     ]
   },

@@ -1,6 +1,6 @@
 @AGENTS.md
 
-# akash.build — portfolio
+# skyeverse.space — portfolio
 
 Personal portfolio for Aakash Aggarwal. Next.js (App Router), fully static, no backend.
 
