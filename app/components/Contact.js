@@ -36,20 +36,6 @@ export default function Contact() {
                 </a>
               );
             })}
-
-            {contact.availability && (
-              <div className="availability">
-                <p className="availability-label">
-                  <span className="availability-dot" />
-                  {contact.availability.label}
-                </p>
-                {contact.availability.lines.map((line) => (
-                  <p className="availability-line" key={line}>
-                    {line}
-                  </p>
-                ))}
-              </div>
-            )}
           </div>
         </div>
       </div>

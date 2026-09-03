@@ -38,10 +38,17 @@ html = html.replace(
 
 // Preload hints point at files that won't exist beside the page.
 html = html.replace(/<link[^>]*rel="(?:preload|prefetch|modulepreload)"[^>]*>/g, "");
-html = html.replace(
-  /href="\/favicon\.ico[^"]*"/g,
-  `href="${dataUri("/favicon.ico", "image/x-icon")}"`,
-);
+// The icon moved from app/favicon.ico to app/icon.svg; inline whichever the
+// export actually emitted so a missing file can't fail the whole build.
+for (const [pattern, file, mime] of [
+  [/href="\/favicon\.ico[^"]*"/g, "/favicon.ico", "image/x-icon"],
+  [/href="\/icon\.svg[^"]*"/g, "/icon.svg", "image/svg+xml"],
+]) {
+  if (!pattern.test(html)) continue;
+  pattern.lastIndex = 0;
+  if (!fs.existsSync(path.join(OUT, file.slice(1)))) continue;
+  html = html.replace(pattern, `href="${dataUri(file, mime)}"`);
+}
 
 // getAssetPrefix() reads document.currentScript.src, which is empty on an inline
 // script and makes `new URL(src)` throw. Hand it a detached script that looks right.

@@ -103,7 +103,6 @@ button {
   transition: color 0.15s;
 }
 
-.nav-links a:hover,
 .nav-links a.active {
   color: rgba(240, 236, 228, 0.95);
 }
@@ -177,6 +176,9 @@ button {
   font-family: var(--display);
   font-size: 33px;
   font-weight: 400;
+  /* Display type inheriting the 1.55 body line-height opens a visible gap
+     wherever it wraps — which on a phone is most of the time. */
+  line-height: 1.12;
   letter-spacing: -0.02em;
   margin: 0 0 4px;
 }
@@ -354,9 +356,6 @@ button {
   letter-spacing: 0.06em;
 }
 
-.skip:hover {
-  color: rgba(240, 236, 228, 0.7);
-}
 
 /* explore dock */
 
@@ -389,10 +388,6 @@ button {
   transition: border-color 0.15s, color 0.15s;
 }
 
-.dock-pill:hover {
-  border-color: rgba(240, 236, 228, 0.45);
-  color: var(--dark-text);
-}
 
 .dock-hint {
   font-family: var(--mono);
@@ -701,6 +696,9 @@ button {
   font-family: var(--display);
   font-size: 33px;
   font-weight: 400;
+  /* Display type inheriting the 1.55 body line-height opens a visible gap
+     wherever it wraps — which on a phone is most of the time. */
+  line-height: 1.12;
   letter-spacing: -0.02em;
   margin: 0 0 18px;
 }
@@ -750,9 +748,6 @@ button {
   transition: border-color 0.15s;
 }
 
-.proj-repo:hover {
-  border-bottom-color: var(--amber-mid);
-}
 
 .kv {
   display: grid;
@@ -797,9 +792,6 @@ button {
   margin-top: 18px;
 }
 
-.case-btn:hover {
-  background: rgba(182, 130, 53, 0.09);
-}
 
 .case-panel {
   border: 1px solid rgba(32, 31, 29, 0.18);
@@ -849,9 +841,6 @@ button {
   padding-bottom: 13px;
 }
 
-.stage-btn:hover .stage-title {
-  color: var(--amber-deep);
-}
 
 .stage-num {
   font-family: var(--mono);
@@ -960,9 +949,6 @@ button {
   padding: 12px 18px;
 }
 
-.btn-mail:hover {
-  background: rgba(225, 173, 102, 0.1);
-}
 
 .link-list {
   border-top: 1px solid rgba(240, 236, 228, 0.16);
@@ -983,45 +969,6 @@ button {
   color: rgba(240, 236, 228, 0.45);
 }
 
-.link-row:hover {
-  color: var(--amber);
-}
-
-.availability {
-  margin-top: 30px;
-}
-
-.availability-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--amber);
-  margin: 0 0 12px;
-}
-
-.availability-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--amber);
-}
-
-.availability-line {
-  max-width: 46ch;
-  font-size: 14px;
-  line-height: 1.55;
-  color: rgba(240, 236, 228, 0.62);
-  margin: 0 0 6px;
-}
-
-.availability-line:last-child {
-  color: rgba(240, 236, 228, 0.42);
-  margin-bottom: 0;
-}
 
 /* footer */
 
@@ -1112,6 +1059,137 @@ button {
 
   .nav-links {
     gap: 12px;
+    font-size: 11px;
+  }
+}
+
+
+/* Hover styling only where a real pointer exists. On touch, :hover latches
+   after a tap and makes an already-pressed control look stuck. */
+@media (hover: hover) and (pointer: fine) {
+  .skip:hover {
+    color: rgba(240, 236, 228, 0.7);
+  }
+  .dock-pill:hover {
+    border-color: rgba(240, 236, 228, 0.45);
+    color: var(--dark-text);
+  }
+  .proj-repo:hover {
+    border-bottom-color: var(--amber-mid);
+  }
+  .case-btn:hover {
+    background: rgba(182, 130, 53, 0.09);
+  }
+  .stage-btn:hover .stage-title {
+    color: var(--amber-deep);
+  }
+  .btn-mail:hover {
+    background: rgba(225, 173, 102, 0.1);
+  }
+  .link-row:hover {
+    color: var(--amber);
+  }
+  .nav-links a:hover {
+    color: rgba(240, 236, 228, 0.95);
+  }
+}
+
+
+/* ─────────── touch & small screens ─────────── */
+
+/* A tap gives no hover feedback, so every control needs a pressed state —
+   without one a working button reads as a dead one. */
+.toggle button:active,
+.case-btn:active,
+.dock-pill:active,
+.stage-btn:active,
+.btn-mail:active,
+.link-row:active,
+.proj-repo:active,
+.skip:active {
+  opacity: 0.55;
+}
+
+a,
+button,
+input {
+  -webkit-tap-highlight-color: rgba(225, 173, 102, 0.18);
+}
+
+/* The nav is fixed, so an anchor jump would otherwise land with the section
+   slug tucked underneath it. */
+.sec,
+.hero {
+  scroll-margin-top: 56px;
+}
+
+@media (max-width: 900px) {
+  /* 44px minimum tap target — the toggle and the case accordion were 40px and
+     37px, small enough that a thumb misses and the control reads as broken. */
+  .toggle button {
+    min-height: 46px;
+    padding: 13px 16px;
+    flex: 1 1 0;
+  }
+
+  .toggle {
+    display: flex;
+    width: 100%;
+  }
+
+  .work-top .toggle {
+    flex: 1 1 100%;
+  }
+
+  .case-btn {
+    min-height: 46px;
+    padding: 13px 18px;
+  }
+
+  .stage-btn {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .dock-pill {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .proj-repo {
+    display: inline-block;
+    padding: 10px 0;
+  }
+
+  .link-row {
+    padding: 17px 2px;
+  }
+
+  .nav-links a {
+    display: inline-block;
+    padding: 8px 0;
+  }
+
+  /* The terminal keeps desktop-width mono lines, so on a phone every line
+     wraps two or three times and the box runs past the screen. */
+  .term-body {
+    padding: 14px 13px;
+    font-size: 11.5px;
+    line-height: 1.55;
+  }
+
+  .term-head {
+    padding: 9px 13px;
+  }
+
+  .term-input {
+    font-size: 11.5px;
+  }
+}
+
+@media (max-width: 560px) {
+  .term-body {
     font-size: 11px;
   }
 }
